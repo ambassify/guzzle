@@ -69,7 +69,7 @@ class CurlMultiHandler
     public function __invoke(RequestInterface $request, array $options)
     {
         $e = (new \Exception())->getTraceAsString();
-        \Logger::important('INVOKE');
+        \Logger::important('INVOKE ' . $request->getMethod() . ' ' . $request->getUri());
         \Logger::important($e);
 
         $easy = $this->factory->create($request, $options);

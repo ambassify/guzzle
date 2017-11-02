@@ -35,6 +35,10 @@ class CurlMultiHandler
      */
     public function __construct(array $options = [])
     {
+        $e = (new \Exception())->getTraceAsString();
+        \Logger::important('CONSTRUCTOR');
+        \Logger::important($e);
+
         $this->factory = isset($options['handle_factory'])
             ? $options['handle_factory'] : new CurlFactory(50);
         $this->selectTimeout = isset($options['select_timeout'])
@@ -52,6 +56,10 @@ class CurlMultiHandler
 
     public function __destruct()
     {
+        $e = (new \Exception())->getTraceAsString();
+        \Logger::important('DESTRUCTOR');
+        \Logger::important($e);
+
         if (isset($this->_mh)) {
             curl_multi_close($this->_mh);
             unset($this->_mh);
@@ -60,6 +68,10 @@ class CurlMultiHandler
 
     public function __invoke(RequestInterface $request, array $options)
     {
+        $e = (new \Exception())->getTraceAsString();
+        \Logger::important('INVOKE');
+        \Logger::important($e);
+
         $easy = $this->factory->create($request, $options);
         $id = (int) $easy->handle;
 
